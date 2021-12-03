@@ -28,7 +28,7 @@ function validateInput(testInput) {
     }
 }
 // function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel)
-function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     const div = document.getElementById("faultyItems");
     const fuelId = document.getElementById("fuelStatus");
     const cargoId = document.getElementById("cargoStatus");
