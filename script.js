@@ -5,20 +5,26 @@
 window.addEventListener("load", function() {
    console.log("peanuts0");
    let form = document.querySelector("form");
-      form.addEventListener("submit", function(event) {
+      form.addEventListener("submit", event => {
+		  event.preventDefault();
          let pilotNameInput = document.querySelector("#pilotName");
+		
+		 alert(pilotNameInput.value);
          let copilotNameInput = document.querySelector("#copilotName");
          let fuelLevelInput = document.querySelector("#fuelLevel");
          let cargoMassInput = document.querySelector("#cargoMass");
-         console.log("peanuts0");
-         if (pilotNameInput.value==="" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "" ) {
+         console.log("peanuts1");
+		
+         if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "" ) {
             console.log("peanuts!")
             alert("All fields are required!");
-            event.preventDefault()}
-         else {
+        } else {
             formSubmission(document,list, pilotNameInput,copilotNameInput,fuelLevelInput, cargoMassInput);
+		
          }
+		
       })
+});
 
 
    // let listedPlanets;
@@ -32,4 +38,4 @@ window.addEventListener("load", function() {
    //     // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
  
    // })  
-})
+// })
