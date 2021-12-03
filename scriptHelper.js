@@ -23,26 +23,26 @@ function validateInput(testInput) {
     if(isNaN(testInput)) {
         return "Not a Number"
     }
-    if(typeof testInput==="number") {
+    else {
         return "Is a Number"
     }
 }
 // function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel)
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+   
+    if (validateInput(pilot.value)==="Is a Number" ||
+    validateInput(copilot.value)==="Is a Number" ||
+    validateInput(fuelLevel.value)==="Not a Number" ||
+    validateInput(cargoMass.value)==="Not a Number"){
+        alert("Make sure to enter valid information for each field");
+    }
+    
+   
+   
     const div = document.getElementById("faultyItems");
     const fuelId = document.getElementById("fuelStatus");
     const cargoId = document.getElementById("cargoStatus");
     const launchHeading= document.getElementById("launchStatus")
-   
-    // if (validateInput(pilot)==="Is a Number") ||
-    // if (validateInput(copilot)==="Is a Number") ||
-    // if (validateInput(fuelLevel)==="Not a Number") ||
-    // if (validateInput(cargoMass)==="Not a Number"){
-    //     let form = document.querySelector("form");
-    //     form.addEventListener("submit", function(event){
-    //     alert("Make sure to enter valid information for each field");}
-    //     event.preventDefault();
-    // }
     
     div.innerHTML = `
         <ol>
@@ -53,15 +53,15 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
         </ol>
     `;
     
-    if (fuelLevel<10000){
-        div.innerHTML.style.visibilty = "visible"
+    if (fuelLevel.value<10000){
+        list.style.visibilty = "visible";
         launchHeading.style.color = "red";
-        launchHeading.innerHTML= "Shuttle not ready for launch"
-        fuelId.innerHTML="Fuel level too low for launch"
+        launchHeading.innerHTML= "Shuttle not ready for launch";
+        fuelId.innerHTML="Fuel level too low for launch";
     }
 
-    if (cargoMass>10000){
-        div.innerHTML.style.visibilty = "visible"
+    else if (cargoMass.value>10000){
+        div.style.visibilty = "visible"
         launchHeading.style.color = "red";
         launchHeading.innerHTML= "Shuttle not ready for launch"
         cargoId.innerHTML="Cargo Mass too high for launch"

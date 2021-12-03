@@ -7,16 +7,23 @@ window.addEventListener("load", function() {
    let form = document.querySelector("form");
       form.addEventListener("submit", event => {
 		  event.preventDefault();
-         let pilotNameInput = document.querySelector("#pilotName");
-		
-		 alert(pilotNameInput.value);
-         let copilotNameInput = document.querySelector("#copilotName");
-         let fuelLevelInput = document.querySelector("#fuelLevel");
-         let cargoMassInput = document.querySelector("#cargoMass");
+         let pilotNameInput = document.querySelector("input[name=pilotName]");
+         let copilotNameInput = document.querySelector("input[name=copilotName]");
+         let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
+         let cargoMassInput = document.querySelector("input[name=cargoMass]");
+         let list= document.getElementById("faultyItems")
          console.log("peanuts1");
 		
-         if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "" ) {
-            console.log("peanuts!")
+         if (validateInput(pilotNameInput.value) === "Empty") {
+            alert("All fields are required!");
+         } 
+         if (validateInput(copilotNameInput.value) === "Empty" ){
+         alert("All fields are required!");
+         }
+         if (validateInput(fuelLevelInput.value) === "Empty" ){
+         alert("All fields are required!");
+         }
+         if (validateInput(cargoMassInput.value) === "Empty" ) {
             alert("All fields are required!");
         } else {
             formSubmission(document,list, pilotNameInput,copilotNameInput,fuelLevelInput, cargoMassInput);
