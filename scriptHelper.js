@@ -2,18 +2,20 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-   /*
+    const divDestination= document.getElementById("missionTarget")
+   
+    // Here is the HTML formatting for our mission target div.
+   divDestination.innerHTML=`
                 <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name:${name} </li>
+                    <li>Diameter:${diameter} </li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons:${moons} </li>
                 </ol>
-                <img src="">
-   */
+                <img src="${imageUrl}">`
+
 }
 
 function validateInput(testInput) {
@@ -38,35 +40,32 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     }
     
    
-   
     const div = document.getElementById("faultyItems");
     const fuelId = document.getElementById("fuelStatus");
     const cargoId = document.getElementById("cargoStatus");
     const launchHeading= document.getElementById("launchStatus")
-    
-    div.innerHTML = `
-        <ol>
-            <li id="pilotStatus" data-testid="pilotStatus">${pilot.value} is ready for Launch</li>
-            <li id="copilotStatus" data-testid="copilotStatus">${copilot.value} is ready for Launch</li>
-            <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
-            <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
-        </ol>
-    `;
-    
+
+    div.querySelector("#pilotStatus").innerHTML = `Pilot ${pilot.value} is ready for launch`;
+    div.querySelector("#copilotStatus").innerHTML = `Pilot ${copilot.value} is ready for launch`;
+
+    let issueDetected=false
+
     if (fuelLevel.value<10000){
-        list.style.visibilty = "visible";
+        list.style.visibility = "visible";
         launchHeading.style.color = "red";
         launchHeading.innerHTML= "Shuttle not ready for launch";
         fuelId.innerHTML="Fuel level too low for launch";
+        issueDetected=true
     }
 
-    else if (cargoMass.value>10000){
-        div.style.visibilty = "visible"
+    if (cargoMass.value>10000){
+        div.style.visibility = "visible"
         launchHeading.style.color = "red";
         launchHeading.innerHTML= "Shuttle not ready for launch"
         cargoId.innerHTML="Cargo Mass too high for launch"
+        issueDetected= true
     
-    } else {
+    } if (issueDetected===false){
         launchHeading.style.color = "green";
         launchHeading.innerHTML= "Shuttle is ready for launch"
     }
@@ -74,27 +73,22 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch().then( function(response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        response.json()
         });
 
     return planetsReturned;
 }
 
-function pickPlanet(planets) {
+// function pickPlanet(planets) {
+//    for(let i=0; i<6; i++){
+//     let maxValue=6  
+//     let planetIndex= Math.floor(Math.random()*maxValue);
+//       return planets[planetIndex];
+//    } 
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
