@@ -1,6 +1,6 @@
 // Write your JavaScript code here!
 
-const { myFetch } = require("./scriptHelper");
+// const { myFetch } = require("./scriptHelper");
 
 // const { myFetch, pickPlanet } = require("./scriptHelper");
 
@@ -21,13 +21,13 @@ window.addEventListener("load", function() {
          if (validateInput(pilotNameInput.value) === "Empty") {
             alert("All fields are required!");
          } 
-         if (validateInput(copilotNameInput.value) === "Empty" ){
+         else if (validateInput(copilotNameInput.value) === "Empty" ){
          alert("All fields are required!");
          }
-         if (validateInput(fuelLevelInput.value) === "Empty" ){
+         else if (validateInput(fuelLevelInput.value) === "Empty" ){
          alert("All fields are required!");
          }
-         if (validateInput(cargoMassInput.value) === "Empty" ) {
+         else if (validateInput(cargoMassInput.value) === "Empty" ) {
             alert("All fields are required!");
         } else {
             formSubmission(document,list, pilotNameInput,copilotNameInput,fuelLevelInput, cargoMassInput);
@@ -35,8 +35,6 @@ window.addEventListener("load", function() {
          }
 		
       })
-});
-
 
 
    let listedPlanets;
@@ -47,10 +45,12 @@ window.addEventListener("load", function() {
        console.log(listedPlanets);
    }).then(function () {
        console.log(listedPlanets);
-       // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+   //     // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
 
-
-       
-      //  addDestinationInfo(pickPlanet(listedPlanets))
+        let selectedPlanet=pickPlanet(listedPlanets)
+       console.log(selectedPlanet.image);
+        addDestinationInfo(document,selectedPlanet.name, selectedPlanet.diameter, selectedPlanet.star, selectedPlanet.distance, selectedPlanet.moons, selectedPlanet.image)
  
    })  
+
+});
